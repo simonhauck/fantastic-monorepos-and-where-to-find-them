@@ -1,0 +1,16 @@
+{
+  "name": "web-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "",
+    "generate-tf-cdk": "cdktf get",
+    "build": "",
+    "start": "",
+    "lint": "",
+    "lint:fix": ""
+  },
+  "dependencies": {
+    "cdktf-cli": "^0.20.3"
+  }
+}

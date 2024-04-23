@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "config:base",
+    ":dependencyDashboard",
+    ":automergeAll",
+    ":automergeBranch"
+  ],
+  "packageRules": [
+    {
+      "groupName": "react",
+      "matchPackagePatterns": [
+        "^.*react.*$"
+      ]
+    }
+  ]
+}
