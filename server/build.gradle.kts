@@ -1,14 +1,10 @@
-import Build_common_liquibase_gradle.GenerateNewLiquibaseChangeLog
 import com.github.psxpaul.task.ExecJoin
 import com.github.psxpaul.task.JavaExecFork
 import org.springdoc.openapi.gradle.plugin.OpenApiGeneratorTask
 
 plugins {
-    id("build.common.artifactory")
     id("build.common.kotlin-conventions")
     id("build.common.spring-conventions")
-    id("build.common.docker")
-    id("build.common.liquibase")
 
     // Generate open api doc
     alias(libs.plugins.openApiDoc)
@@ -68,22 +64,6 @@ testing {
 
 @Suppress("UnstableApiUsage") tasks.check { dependsOn(testing.suites.named("integrationTest")) }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Generate database changelog
-// ---------------------------------------------------------------------------------------------------------------------
-
-tasks.register<GenerateNewLiquibaseChangeLog>("newChangeLog") {
-    liquibaseRoot = layout.projectDirectory.file("src/main/resources/db/changelog")
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Docker Build
-// ---------------------------------------------------------------------------------------------------------------------
-
-jib {
-    to { image = "cryptojuenger/example" }
-    container { ports = listOf("8080") }
-}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // OpenAPI Swagger

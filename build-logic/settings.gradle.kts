@@ -10,7 +10,6 @@ plugins {
 }
 
 include(
-    "artifactory",
     "node-convention",
     "kotlin-convention",
     "liquibase",
