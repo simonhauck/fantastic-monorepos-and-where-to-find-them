@@ -17,6 +17,8 @@ plugins {
 
 configurations.compileOnly { extendsFrom(configurations.annotationProcessor.get()) }
 
+// TODO Simon.Hauck 2024-04-23 - Add frontend to
+
 dependencies {
     implementation(libs.bundles.springStarterWeb)
     implementation(libs.springActuator)

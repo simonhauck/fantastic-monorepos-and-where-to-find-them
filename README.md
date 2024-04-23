@@ -1,6 +1,6 @@
 ## How to start development
 
-[![Master Build](https://github.com/crypto-juenger/startup-template/actions/workflows/on-master-push.yml/badge.svg)](https://github.com/crypto-juenger/startup-template/actions/workflows/on-master-push.yml)
+[![Master](https://github.com/simonhauck/fantastic-monorepos-and-where-to-find-them/actions/workflows/on-master-push.yml/badge.svg)](https://github.com/simonhauck/fantastic-monorepos-and-where-to-find-them/actions/workflows/on-master-push.yml)
 
 ### Other Module documentation
 

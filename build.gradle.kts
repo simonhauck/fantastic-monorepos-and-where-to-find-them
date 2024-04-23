@@ -3,7 +3,7 @@ import java.util.*
 plugins { id("build.common.kotlin-conventions") apply false }
 
 allprojects {
-    group = "com.github.cryptojuenger.template"
+    group = "fantastic-monorepos-and-where-to-find-them"
     version = readVersionFromFile(file("${rootProject.projectDir.resolve("version.properties")}"))
 }
 

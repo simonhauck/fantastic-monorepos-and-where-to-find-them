@@ -11,7 +11,7 @@ repository.
 ## Get rid if "template" name
 
 1. Change name in `settings.gradle.kts`
-2. Change the gorup in the root `build.gradle.kts`
+2. Change the group in the root `build.gradle.kts`
 3. Change module structure (it contains the template name and the group)
 4. Change the action status image in the readme
 
