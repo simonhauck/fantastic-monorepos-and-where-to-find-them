@@ -25,7 +25,7 @@ openApiGenerate {
             "npmName" to "@monorepo-api",
             "snapshot" to "false",
             "npmVersion" to "1.0.0",
-            "ngVersion" to "15.0.0",
+            "ngVersion" to "17.0.0",
             "serviceSuffix" to "",
             "serviceFileSuffix" to ".controller"
         )
