@@ -1,0 +1,10 @@
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+/.cache
+/coverage
+/.angular
+/src/assets
+
+/build

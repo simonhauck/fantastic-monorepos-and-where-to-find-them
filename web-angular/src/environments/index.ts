@@ -5,4 +5,6 @@ export interface IEnvironment {
   serverBase: string;
 }
 
-export const ENVIRONMENT = new InjectionToken<IEnvironment>('environment_token');
+export const ENVIRONMENT = new InjectionToken<IEnvironment>(
+  'environment_token'
+);
