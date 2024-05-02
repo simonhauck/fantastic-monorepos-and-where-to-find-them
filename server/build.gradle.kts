@@ -17,23 +17,10 @@ configurations.compileOnly { extendsFrom(configurations.annotationProcessor.get(
 
 dependencies {
     implementation(libs.bundles.springStarterWeb)
-    implementation(libs.springActuator)
-    implementation(libs.springDataJdbc)
-    implementation(libs.kotlinLogging)
-
-    implementation(libs.liquibase)
-    runtimeOnly(libs.postgresDriver)
-    runtimeOnly(libs.h2Driver)
-
-    developmentOnly(libs.springDevTools)
-    developmentOnly(libs.springDockerCompose)
-    annotationProcessor(libs.springAnnotationProcessor)
     annotationProcessor(libs.springAnnotationProcessor)
 
     implementation(libs.springDocOpenApi)
 }
-
-tasks.bootRun { workingDir = rootProject.projectDir }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Testing
@@ -64,7 +51,6 @@ testing {
 
 @Suppress("UnstableApiUsage") tasks.check { dependsOn(testing.suites.named("integrationTest")) }
 
-
 // ---------------------------------------------------------------------------------------------------------------------
 // OpenAPI Swagger
 // ---------------------------------------------------------------------------------------------------------------------
@@ -75,15 +61,7 @@ openApi {
     apiDocsUrl.set("http://localhost:$apiGeneratedPort/v3/api-docs/openapi.json")
     outputDir.set(file("${project(":server-api").projectDir}/src/main/resources"))
 
-    customBootRun {
-        args.set(
-            listOf(
-                "--server.port=$apiGeneratedPort",
-                "--spring.profiles.active=h2",
-                "--spring.docker.compose.enabled=false"
-            )
-        )
-    }
+    customBootRun { args.set(listOf("--server.port=$apiGeneratedPort")) }
 }
 
 // Run open api generate always when requested
