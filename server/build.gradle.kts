@@ -12,7 +12,7 @@ plugins {
 
 configurations.compileOnly { extendsFrom(configurations.annotationProcessor.get()) }
 
-// TODO Simon.Hauck 2024-04-23 - Add frontend to
+val frontendApp: Configuration by configurations.creating {}
 
 dependencies {
     annotationProcessor(libs.springAnnotationProcessor)
@@ -22,7 +22,57 @@ dependencies {
 
     testImplementation(libs.bundles.springTestCore)
 
+    if (isProd()) {
+        frontendApp(project(":web-angular", "zip"))
+    } else {
+        frontendApp(files("./mockFrontend/dummy-frontend.zip"))
+    }
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Add resources
+// ---------------------------------------------------------------------------------------------------------------------
+
+// To perform a file operation in a doFirst or doLast you have to use these injected operations to
+// be compatible with the configuration cache.
+// Full list:
+// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:requirements
+interface Injected {
+    @get:Inject val archiveOperations: ArchiveOperations
+}
+
+val frontendDirectory = "staticResources/frontend"
+val tempFrontendDirectory = "tmp/angular-frontend"
+
+val frontendZipName = "web-resources.zip"
+val copyFrontendTask =
+    tasks.register<Sync>("copyFrontend") {
+        val buildFrontendDirectory = layout.buildDirectory.dir(tempFrontendDirectory)
+        from(frontendApp)
+        rename(".*", frontendZipName)
+        into(buildFrontendDirectory)
+    }
+
+val unzipFrontendTask =
+    tasks.register<Sync>("unzipFrontend") {
+        dependsOn(copyFrontendTask)
+
+        val injected = project.objects.newInstance<Injected>()
+        val zip =
+            injected.archiveOperations.zipTree(
+                layout.buildDirectory.file("$tempFrontendDirectory/$frontendZipName")
+            )
+        val buildDirUnzipped = layout.buildDirectory.dir(frontendDirectory)
+        from(zip)
+        into(buildDirUnzipped)
+    }
+
+fun Copy.addFrontendToJar() {
+    dependsOn(unzipFrontendTask)
+    from(layout.buildDirectory.dir(frontendDirectory)) { into("static") }
+}
+
+tasks.processResources { addFrontendToJar() }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // OpenAPI Swagger
@@ -40,7 +90,6 @@ openApi {
 // Run open api generate always when requested
 tasks.withType<OpenApiGeneratorTask> { outputs.upToDateWhen { false } }
 
-
 // Whitelist tasks that are not compatible with configuration cache
 // If not whitelisted they will fail the build
 tasks.withType<JavaExecFork> {
@@ -48,3 +97,11 @@ tasks.withType<JavaExecFork> {
 }
 
 tasks.withType<ExecJoin> { notCompatibleWithConfigurationCache("ExecJoin is not yet supported") }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Utility
+// ---------------------------------------------------------------------------------------------------------------------
+
+private fun isProd(): Boolean {
+    return project.properties.containsKey("prod")
+}
