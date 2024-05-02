@@ -11,7 +11,6 @@ springAllOpenPlugin = { module = "org.jetbrains.kotlin:kotlin-allopen", version.
 springDependencyPlugin = { module = "io.spring.gradle:dependency-management-plugin", version = "1.1.4" }
 ktfmtPlugin = { module = "com.ncorti.ktfmt.gradle:plugin", version = "0.18.0" }
 testLoggerPlugin = { module = "com.adarshr:gradle-test-logger-plugin", version = "4.0.0" }
-jibPlugin = { module = "com.google.cloud.tools:jib-gradle-plugin", version = "3.4.2" }
 nodeGradlePlugin = { module = "com.github.node-gradle:gradle-node-plugin", version = "7.0.2" }
 
 # Spring
