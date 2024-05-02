@@ -22,7 +22,7 @@ openApiGenerate {
 
     configOptions =
         mapOf(
-            "npmName" to "@bruker/neon-api",
+            "npmName" to "@monorepo-api",
             "snapshot" to "false",
             "npmVersion" to "1.0.0",
             "ngVersion" to "15.0.0",
