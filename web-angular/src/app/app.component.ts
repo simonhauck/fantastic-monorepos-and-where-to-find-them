@@ -1,16 +1,23 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
+import {ExampleController, HelloWorld} from '@monorepo-api';
+import {Observable} from "rxjs";
+import {AsyncPipe, JsonPipe} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AsyncPipe, JsonPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'web-angular';
+export class AppComponent implements OnInit {
+  helloWorld$!: Observable<HelloWorld>;
 
-  constructor() {
+  constructor(private exampleController: ExampleController) {
+  }
+
+  ngOnInit(): void {
+    this.helloWorld$ = this.exampleController.helloWorld();
   }
 }
