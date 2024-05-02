@@ -14,6 +14,6 @@ buildCache { local { removeUnusedEntriesAfterDays = 10 } }
 
 includeBuild("build-logic")
 
-include("server", "server-api", "web-nextjs")
+include("server", "server-api", "web-angular")
 
 rootProject.name = "fantastic-monorepos-and-where-to-find-them"
