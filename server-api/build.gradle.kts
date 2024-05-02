@@ -1,29 +1,44 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins { alias(libs.plugins.openApiGenerator) }
 
 val generateApiBaseDir = "generated/typescript-fetch"
 
+tasks.register<Delete>("clean") { delete { layout.buildDirectory } }
+
+val angularBindingName = "angular-binding"
+val angularBindingPath = layout.buildDirectory.dir("generated/$angularBindingName")
+val openApiJsonFile = "$projectDir/src/main/resources/openapi.json"
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Angular client
+// ---------------------------------------------------------------------------------------------------------------------
+
 openApiGenerate {
-    generatorName.set("typescript-fetch")
-    inputSpec.set(layout.projectDirectory.file("src/main/resources/openapi.json").asFile.path)
-    outputDir.set(layout.buildDirectory.dir(generateApiBaseDir).get().asFile.path)
+    generatorName = "typescript-angular"
+    inputSpec = openApiJsonFile
+    outputDir = angularBindingPath.map { it.asFile.path }
     cleanupOutput = true
-    configOptions.set(
-        mapOf("npmName" to "@server/api", "npmVersion" to "1.0.0", "supportsES6" to "true")
-    )
+
+    configOptions =
+        mapOf(
+            "npmName" to "@bruker/neon-api",
+            "snapshot" to "false",
+            "npmVersion" to "1.0.0",
+            "ngVersion" to "15.0.0",
+            "serviceSuffix" to "",
+            "serviceFileSuffix" to ".controller"
+        )
 }
 
-tasks.register<Delete>("clean") { delete(layout.buildDirectory) }
+val generateApiBindingTask = tasks.withType<GenerateTask> {}
 
-val zipTypeScriptFetchApiTask =
-    tasks.register<Zip>("zipTypeScriptFetchApi") {
-        dependsOn(tasks.openApiGenerate)
-        from(layout.buildDirectory.dir("$generateApiBaseDir/src"))
+val zipAngularBindingTask =
+    tasks.register<Zip>("assemble") {
+        dependsOn(generateApiBindingTask)
+        from(angularBindingPath)
         destinationDirectory.set(layout.buildDirectory.dir("zip"))
-        archiveBaseName.set("typescript-fetch-client")
+        archiveBaseName.set(angularBindingName)
     }
 
-tasks.register("assemble") { dependsOn(zipTypeScriptFetchApiTask) }
-
-configurations.create("typescript-fetch").let {
-    artifacts.add(it.name, zipTypeScriptFetchApiTask.get())
-}
+configurations.create("zip").let { artifacts.add(it.name, zipAngularBindingTask.get()) }
