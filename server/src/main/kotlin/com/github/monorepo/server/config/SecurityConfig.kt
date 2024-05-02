@@ -1,4 +1,4 @@
-package com.github.cryptojuenger.template.server.config
+package com.github.monorepo.server.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry

@@ -1,4 +1,4 @@
-package com.github.cryptojuenger.template.server
+package com.github.monorepo.server
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 class ExampleController {
     @GetMapping()
     fun helloWorld(): HelloWorld {
-        return HelloWorld("CryptoJuenger are the best")
+        return HelloWorld("Monorepos are the best")
     }
 }
 

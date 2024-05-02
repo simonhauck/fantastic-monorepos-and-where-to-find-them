@@ -8,7 +8,6 @@ plugins {
 
     // Generate open api doc
     alias(libs.plugins.openApiDoc)
-    `jvm-test-suite`
 }
 
 configurations.compileOnly { extendsFrom(configurations.annotationProcessor.get()) }
@@ -16,40 +15,14 @@ configurations.compileOnly { extendsFrom(configurations.annotationProcessor.get(
 // TODO Simon.Hauck 2024-04-23 - Add frontend to
 
 dependencies {
-    implementation(libs.bundles.springStarterWeb)
     annotationProcessor(libs.springAnnotationProcessor)
 
+    implementation(libs.bundles.springStarterWeb)
     implementation(libs.springDocOpenApi)
+
+    testImplementation(libs.bundles.springTestCore)
+
 }
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Testing
-// ---------------------------------------------------------------------------------------------------------------------
-
-@Suppress("UnstableApiUsage")
-testing {
-    suites {
-        val test by
-            getting(JvmTestSuite::class) {
-                useJUnitJupiter()
-                dependencies {
-                    // Alternatively check this out:
-                    // https://stackoverflow.com/questions/70448998/gradle-integration-test-suite-depending-on-testimplementation-dependencies
-                    implementation.bundle(libs.bundles.springTestCore)
-                }
-            }
-
-        val integrationTest by
-            register<JvmTestSuite>("integrationTest") {
-                dependencies {
-                    implementation.bundle(libs.bundles.springTestCore)
-                    implementation(project())
-                }
-            }
-    }
-}
-
-@Suppress("UnstableApiUsage") tasks.check { dependsOn(testing.suites.named("integrationTest")) }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // OpenAPI Swagger
@@ -67,6 +40,9 @@ openApi {
 // Run open api generate always when requested
 tasks.withType<OpenApiGeneratorTask> { outputs.upToDateWhen { false } }
 
+
+// Whitelist tasks that are not compatible with configuration cache
+// If not whitelisted they will fail the build
 tasks.withType<JavaExecFork> {
     notCompatibleWithConfigurationCache("JavaExecFork is not yet supported")
 }
