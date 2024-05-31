@@ -3,7 +3,7 @@ import com.github.gradle.node.npm.task.NpmTask
 plugins { id("com.github.node-gradle.node") }
 
 node {
-    version.set("20.11.0")
+    version.set("22.2.0")
     download.set(true)
     workDir.set(layout.buildDirectory.dir(".cache/nodejs"))
     fastNpmInstall.set(true)

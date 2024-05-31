@@ -78,12 +78,18 @@ tasks.processResources { addFrontendToJar() }
 // OpenAPI Swagger
 // ---------------------------------------------------------------------------------------------------------------------
 
-// User another port to have it not clashing with running instances
+// To make our life easier, we used a code-first approach here.
+// We write the Controller / Api in Kotlin, and then run the generateOpenApiDocs task.
+// The task writes the generated openApiJson into the server-api module where it will be used to
+// generate a new API client.
+// The compatibility of the specified API and the actually implemented API is ensured with a Test.
+//
+// Alternatively you can generate a spring-kotlin client in the server-api module.
+
 openApi {
     val apiGeneratedPort = 59186
     apiDocsUrl.set("http://localhost:$apiGeneratedPort/v3/api-docs/openapi.json")
     outputDir.set(file("${project(":server-api").projectDir}/src/main/resources"))
-
     customBootRun { args.set(listOf("--server.port=$apiGeneratedPort")) }
 }
 
