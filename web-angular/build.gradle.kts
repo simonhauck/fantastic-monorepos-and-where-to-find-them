@@ -70,7 +70,7 @@ val testTask =
         inputs.dir(angularApiBindingCode)
         outputs.upToDateWhen { true }
 
-        npmCommand.set(listOf("run", "test:ci"))
+        npmCommand.set(listOf("run", "test"))
     }
 
 tasks.checkFormat {

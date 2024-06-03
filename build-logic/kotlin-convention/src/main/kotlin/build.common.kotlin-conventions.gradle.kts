@@ -1,7 +1,6 @@
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.jvm.toolchain.JvmVendorSpec
 import org.gradle.kotlin.dsl.*
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
@@ -20,9 +19,8 @@ kotlin {
         this.languageVersion.set(JavaLanguageVersion.of(21))
         this.vendor.set(JvmVendorSpec.ADOPTIUM)
     }
+    compilerOptions { freeCompilerArgs = listOf("-Xjsr305=strict") }
 }
-
-tasks.withType<KotlinCompile> { kotlinOptions { freeCompilerArgs = listOf("-Xjsr305=strict") } }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Kotlin formatter
@@ -53,7 +51,4 @@ tasks.register("format") {
 // Testing config
 // ---------------------------------------------------------------------------------------------------------------------
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
+tasks.withType<Test> { useJUnitPlatform() }
