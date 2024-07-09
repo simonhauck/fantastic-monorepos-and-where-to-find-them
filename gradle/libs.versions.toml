@@ -23,7 +23,7 @@ springDocOpenApi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui
 
 # Testing
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jUnitVersion" }
-mockitoKt = { module = "org.mockito.kotlin:mockito-kotlin", version = "5.3.1" }
+mockitoKt = { module = "org.mockito.kotlin:mockito-kotlin", version = "5.4.0" }
 springStarterTest = { module = "org.springframework.boot:spring-boot-starter-test" }
 
 [plugins]
