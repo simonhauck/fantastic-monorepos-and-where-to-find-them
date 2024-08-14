@@ -1,7 +1,7 @@
 [versions]
 kotlinVersion = "2.0.10"
 springVersion = "3.3.2"
-jUnitVersion = "5.10.3"
+jUnitVersion = "5.11.0"
 
 [libraries]
 # Plugins that are used in buildSrc
