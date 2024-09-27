@@ -11,7 +11,7 @@ springAllOpenPlugin = { module = "org.jetbrains.kotlin:kotlin-allopen", version.
 springDependencyPlugin = { module = "io.spring.gradle:dependency-management-plugin", version = "1.1.6" }
 ktfmtPlugin = { module = "com.ncorti.ktfmt.gradle:plugin", version = "0.20.1" }
 testLoggerPlugin = { module = "com.adarshr:gradle-test-logger-plugin", version = "4.0.0" }
-nodeGradlePlugin = { module = "com.github.node-gradle:gradle-node-plugin", version = "7.0.2" }
+nodeGradlePlugin = { module = "com.github.node-gradle:gradle-node-plugin", version = "7.1.0" }
 
 # Spring
 springStarterWeb = { module = "org.springframework.boot:spring-boot-starter-web" }
