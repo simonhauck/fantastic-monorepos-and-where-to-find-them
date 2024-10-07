@@ -17,3 +17,4 @@ includeBuild("build-logic")
 include("server", "server-api", "web-angular")
 
 rootProject.name = "fantastic-monorepos-and-where-to-find-them"
+include("reverse-string-library")

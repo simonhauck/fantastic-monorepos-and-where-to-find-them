@@ -20,6 +20,8 @@ dependencies {
     implementation(libs.bundles.springStarterWeb)
     implementation(libs.springDocOpenApi)
 
+    implementation(project(":reverse-string-library"))
+
     testImplementation(libs.bundles.springTestCore)
 
     if (isProd()) {
