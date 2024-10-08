@@ -22,6 +22,12 @@ dependencies {
 
     implementation(project(":reverse-string-library"))
 
+    // This is an example of a "traditional" dependency. The dependency and version must be
+    // explicitly set. This can lead to inconsistencies if used in multiple projects.
+    // This can be replaced with values in libs.version.toml
+    
+    // testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+
     testImplementation(libs.bundles.springTestCore)
 
     if (isProd()) {
