@@ -10,11 +10,10 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
-buildCache { local { removeUnusedEntriesAfterDays = 10 } }
-
 includeBuild("build-logic")
 
-include("server", "server-api", "web-angular")
+include("server", "server-api", "web-angular", "example-duplicate-build-code")
 
 rootProject.name = "fantastic-monorepos-and-where-to-find-them"
+
 include("reverse-string-library")
