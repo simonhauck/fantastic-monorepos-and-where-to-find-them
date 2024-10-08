@@ -28,7 +28,7 @@ springStarterTest = { module = "org.springframework.boot:spring-boot-starter-tes
 
 [plugins]
 openApiDoc = { id = "org.springdoc.openapi-gradle-plugin", version = "1.9.0" }
-openApiGenerator = { id = "org.openapi.generator", version = "7.8.0" }
+openApiGenerator = { id = "org.openapi.generator", version = "7.9.0" }
 
 [bundles]
 springBootPlugins = ["springPlugin", "springAllOpenPlugin", "springDependencyPlugin"]
