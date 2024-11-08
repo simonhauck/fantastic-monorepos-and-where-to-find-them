@@ -12,8 +12,6 @@ plugins {
 
 includeBuild("build-logic")
 
-include("server", "server-api", "web-angular", "example-duplicate-build-code")
+include("server", "server-api", "reverse-string-library", "web-angular", "example-duplicate-build-code")
 
 rootProject.name = "fantastic-monorepos-and-where-to-find-them"
-
-include("reverse-string-library")
