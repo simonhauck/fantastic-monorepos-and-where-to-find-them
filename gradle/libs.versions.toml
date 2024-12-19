@@ -1,6 +1,6 @@
 [versions]
 kotlinVersion = "2.1.0"
-springVersion = "3.4.0"
+springVersion = "3.4.1"
 jUnitVersion = "5.11.4"
 
 [libraries]
